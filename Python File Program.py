@@ -8,9 +8,10 @@ def main():
 
 def AskInfo():
     checkpoint="askinfo"
-    whichoption= int(input("1-Create new file\n"
+    whichoption= str(input("1-Create new file\n"
                            "2-Search for an existing file\n"
-                           "Select an option by typing 1 or 2: "));
+                           "3-exit\n"
+                           "Select an option by typing 1, 2, or 3: "));
     CheckInfo(whichoption, checkpoint);
 
 def CheckInfo(optionwhich,pointcheck):
@@ -18,20 +19,24 @@ def CheckInfo(optionwhich,pointcheck):
     match(pointcheck):
         case 'askinfo':
             optwhich = ord(str(optionwhich));
-            if(ord(str(optionwhich)) < 49 or ord(str(optionwhich)) > 50):
+            if(ord(str(optionwhich)) < 49 or ord(str(optionwhich)) > 51):
                 print("Incorrect response.")
                 AskInfo();
             else:
-                if(optionwhich == 1):
-                    whichfilename = str(input(msg[0]));
-                else:
-                    whichfilename = str(input(msg[0]));
+                match(optwhich):
+                    case 49:
+                        whichfilename = str(input(msg[0]));
+                    case 50:
+                        whichfilename = str(input(msg[1]));
+                    case 51:
+                        print("Goodbye");
+                        
 
-                whichfilename = whichfilename + ".doc";
+                whichfilename = whichfilename + ".txt";
                 FileConnectivity();
         case default:
             print("Houston...we have a problem");
-            sys.exist();
+            sys.exit();
 
 def FileConnectivity():
     fileDir = os.path.dirname(os.path.realpath("__file__"));
@@ -39,6 +44,7 @@ def FileConnectivity():
 
     if(fileexist == True):
         adminfile = open(whichfilename,"r");
+        print("File exist");
     else:
         adminfile = open(whichfilename,"x");
 
